@@ -30,7 +30,7 @@ class SearchController extends Controller
         return view('resultpage', [
             "cnn_indo" => $cnn_indo->getVariables(),
             "detik" => $detik->getVariables(),
-            "kompas" => $detik->getVariables()
+            "kompas" => $kompas->getVariables()
         ]);   
            
     }

@@ -49,8 +49,7 @@ class Kompass extends ParentScraper {
         if ($page->filter('.read__time')->count()>0) {
             $date = $page->filter('.read__time')->text();
             //Kompas.com - 08/05/2021, 12:59 WIB        
-            $date = explode(' ',$date)[2];
-            echo $date;
+            $date = explode(' ',$date)[2];            
             $date = str_replace(',','',$date);
             $day = explode('/',$date)[0];
             $month = explode('/',$date)[1];
