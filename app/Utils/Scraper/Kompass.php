@@ -58,12 +58,13 @@ class Kompass extends ParentScraper {
                 $date = $day.'/'.$this->change_month($month).'/'.$year;
                 $date = DateTime::createFromFormat('j/m/Y', $date);
                 $date_final = $date->format('Y-m-d');  
+                $date_final = DateTime::createFromFormat('Y-m-d',$date_final)->format('Y-m-d');
             }
         }
         
         return [
             "body" => $body,
-            "date" => $date_final         
+            "date" => $date_final            
         ];
         
     }

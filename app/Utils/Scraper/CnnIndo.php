@@ -54,17 +54,19 @@ class CnnIndo extends ParentScraper {
             //18 Nov 2021 18:59 WIB
             $date_array = explode(' ', $date1);
             $date_final = $date_array[3].$this->change_month($date_array[2]).$date_array[1];
+            $date_final = DateTime::createFromFormat('Y-m-d',$date_final)->format('Y-m-d');
             
         } else {
             $date1 = explode(',', $date2)[1];
             $date1 = explode(' ',$date1);
             $date_final = $date1[3].$this->change_month($date1[2]).$date1[1];
+            $date_final = DateTime::createFromFormat('Y-m-d',$date_final)->format('Y-m-d');
         }
               
                 
         return [
             "body" => $body,
-            "date" => $date_final           
+            "date" => $date_final                  
         ];
         
     }

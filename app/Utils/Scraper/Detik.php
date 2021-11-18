@@ -2,6 +2,7 @@
 
 namespace App\Utils\Scraper;
 
+use DateTime;
 use Goutte\Client;
 
 
@@ -74,16 +75,18 @@ class Detik extends ParentScraper {
             $date1 = explode(',', $date1)[1];
             $date1 = explode(' ', $date1);                        
             $date_final = $date1[3].$this->change_month($date1[2]).$date1[1];
+            $date_final = DateTime::createFromFormat('Y-m-d',$date_final)->format('Y-m-d');
         } elseif ($date2 !== "") {
             $date1 = explode(',', $date2)[1];            
             $date1 = explode(' ',$date1);
             $date_final = $date1[3].$this->change_month($date1[2]).$date1[1];
+            $date_final = DateTime::createFromFormat('Y-m-d',$date_final)->format('Y-m-d');
         }
 
 
         return [
             "body" => $body,
-            "date" => $date_final          
+            "date" => $date_final               
         ];
         
     }

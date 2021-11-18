@@ -56,6 +56,7 @@ class JakartaPost extends ParentScraper {
                 $day = explode(' ',$month_day)[2];
                 $date_final = $year.$this->change_month($month).$day;
                 $date_final = trim($date_final);
+                $date_final = DateTime::createFromFormat('Y-m-d',$date_final)->format('Y-m-d');
               
             } elseif (substr_count($date, ',') == 1) {
                //Sat, September 2 2017
@@ -63,6 +64,7 @@ class JakartaPost extends ParentScraper {
                 $date1 = explode(' ',$m_d_y);
                 $date_final = $date1[3].$this->change_month($date1[1]).$date1[2];
                 $date_final = trim($date_final);
+                $date_final = DateTime::createFromFormat('Y-m-d',$date_final)->format('Y-m-d');
               
             }
 
@@ -70,7 +72,7 @@ class JakartaPost extends ParentScraper {
         
         return [
             "body" => $body,
-            "date" => $date_final         
+            "date" => $date_final            
         ];
         
     }

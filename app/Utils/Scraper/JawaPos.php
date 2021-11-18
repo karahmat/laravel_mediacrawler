@@ -55,8 +55,7 @@ class JawaPos extends ParentScraper {
             $year = explode(' ',$date)[2];
             if ($date !== '') {
                 $date_final = $year.$this->change_month($month).$day;
-                // $date = DateTime::createFromFormat('j/m/Y', $date);
-                // $date_final = $date->format('Y-m-d');  
+                $date_final = DateTime::createFromFormat('Y-m-d',$date_final)->format('Y-m-d');
             }
         }
         
