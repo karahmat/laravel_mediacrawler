@@ -1,0 +1,37 @@
+.heading {
+    font-weight: bold;
+    font-size: '20px';
+    color: white;
+    background-color: #2b6777;   
+}
+
+.resultRow {
+    border-bottom: 1px solid black;
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+.resultRow:nth-child(even) {
+    background-color: #c8d8e4;
+}
+
+.resultRow:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+.titleNews {
+    font-weight: bold;
+}
+
+.clickMore {
+    cursor: pointer;
+    color:#52ab98;    
+}
+
+.clickMore:hover {
+    opacity: 0.8;
+}
+
+.inv {
+    display: none;
+}

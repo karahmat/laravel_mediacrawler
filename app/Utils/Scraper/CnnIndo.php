@@ -47,13 +47,14 @@ class CnnIndo extends ParentScraper {
         $date2 = $page->filter('.content_detail > .date')->text();  
 
         $date2 = trim($date2);
-        // #CNN Indonesia | Selasa, 24/03/2020 10:51 WIB
+        // Ruptly, CNN Indonesia | Kamis, 18 Nov 2021 21:33 WIB
         if (str_contains($date2, '|')) {
             $date1 = explode('|',$date2)[1];
             $date1 = explode(',', $date2)[2];
-            $date1 = explode(' ',$date1)[1];            
-            $date1 = DateTime::createFromFormat('j/m/Y', $date1);
-            $date_final = $date1->format('Y-m-d');  
+            //18 Nov 2021 18:59 WIB
+            $date_array = explode(' ', $date1);
+            $date_final = $date_array[3].$this->change_month($date_array[2]).$date_array[1];
+            
         } else {
             $date1 = explode(',', $date2)[1];
             $date1 = explode(' ',$date1);

@@ -18,18 +18,20 @@ class Detik extends ParentScraper {
         
         $page->filter('article')->each(function($article) {
             
+            if($article->filter('h2')->count() > 0) {
+                $this->title[] = $article->filter('h2')->text();
+            }
             
-            $this->title[] = $article->filter('h2')->text();
-                        
-            $one_link = $article->filter('a')->link()->getUri();                 
-            $this->link[] = $one_link;
-            
-            $result = $this->scrape_article($one_link);
-            $this->bodytext[] = $result["body"];
-            $this->date[] = $result["date"];
-            
+            if($article->filter('a')->count() > 0) {
+                $one_link = $article->filter('a')->link()->getUri();
+                $this->link[] = $one_link;    
+                $result = $this->scrape_article($one_link);
+                $this->bodytext[] = $result["body"];
+                $this->date[] = $result["date"];             
+            }
 
         });
+        
         
     }
 
@@ -38,13 +40,17 @@ class Detik extends ParentScraper {
         $client = new Client;
         $page = $client->request('GET', $url);
         $body = "";
+        $date_final = "";
+        $date2="";
               
         if (strpos($url, "health.detik.com") == false) {
-                
-            $paras = $page->filter('.detail__body-text.itp_bodycontent')->filter('p');
-                
-            foreach ($paras as $para) {
-                $body = $body . " " . $para->nodeValue;
+            
+            if ($page->filter('.detail__body-text.itp_bodycontent')->count()>0) {
+                $paras = $page->filter('.detail__body-text.itp_bodycontent')->filter('p');
+                    
+                foreach ($paras as $para) {
+                    $body = $body . " " . $para->nodeValue;
+                }
             }
             
         } elseif (strpos($url, "health.detik.com") !== false) {
@@ -57,30 +63,18 @@ class Detik extends ParentScraper {
             
         }
                 
-        if (strpos($url, "health.detik.com") !== false) {
-            if ($page->filter('.date')->count()==0) {
-                $date2 = $page->filter('.detail__date')->text();  
-            } else {
-                $date2 = $page->filter('.date')->eq(0)->text(); 
-            }            
-            //Selasa, 09 Nov 2021 15:40 WIB         
+        if ($page->filter('.date')->count()==0) {
+            $date2 = $page->filter('.detail__date')->text();  
         } else {
-            $date2 = $page->filter('.detail__date')->text();          
-        }
-        
-        //Senin, 08 Nov 2021 18:09 WIB
-        //Rabu, 10 Nov 2021 00:05 WIB
-        $date1 = explode(',', $date2)[1];
-        
-        //$date1 = explode(' ',$date1);
-        //$date_final = $date1[3].$this->change_month($date1[2]).$date1[1];
+            $date2 = $page->filter('.date')->eq(0)->text(); 
+        }            
         
         if (str_contains($date2, 'Views')) {
             $date1 = explode(' Views ',$date2)[1];
             $date1 = explode(',', $date1)[1];
             $date1 = explode(' ', $date1);                        
             $date_final = $date1[3].$this->change_month($date1[2]).$date1[1];
-        } else {
+        } elseif ($date2 !== "") {
             $date1 = explode(',', $date2)[1];            
             $date1 = explode(' ',$date1);
             $date_final = $date1[3].$this->change_month($date1[2]).$date1[1];

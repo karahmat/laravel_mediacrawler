@@ -15,8 +15,14 @@
             <label for="last_name">Search Word (English)</label>
         </div>
         </div>
-        <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+        <button id="submitBtn" class="btn waves-effect waves-light" type="submit" name="action">Submit
             <i class="material-icons right">send</i>
         </button>
-    </form>    
+        <div class="progress inv">
+            <div class="indeterminate"></div>
+        </div>
+    </form>
+    @section('footer-scripts')
+        @include('scripts.index-script')
+    @endsection    
 </x-layout>
