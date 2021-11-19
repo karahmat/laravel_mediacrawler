@@ -6,12 +6,14 @@
             <div class="col s10 heading">Snippets</div>          
     </div>
     <div class="resultsTable">
+        <x-newsentry :news="$tribunNews" />
         <x-newsentry :news="$cnn_indo" />
-        {{-- <x-newsentry :news="$detik" />
+        <x-newsentry :news="$detik" />
         <x-newsentry :news="$kompas" />
-        <x-newsentry :news="$bisnisIndo" /> --}}
+        <x-newsentry :news="$bisnisIndo" />
         <x-newsentry :news="$jawaPos" />
         <x-newsentry :news="$jakartaPost" />
+        <x-newsentry :news="$merdeka" />        
     </div>
 
     <p><a href="\">Back</a></p>
