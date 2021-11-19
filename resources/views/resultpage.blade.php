@@ -13,7 +13,12 @@
         <x-newsentry :news="$bisnisIndo" />
         <x-newsentry :news="$jawaPos" />
         <x-newsentry :news="$jakartaPost" />
-        <x-newsentry :news="$merdeka" />        
+        <x-newsentry :news="$merdeka" />       
+        <x-newsentry :news="$kumparan" />   
+        <x-newsentry :news="$kompasiana" />   
+        <x-newsentry :news="$republika" />   
+
+
     </div>
 
     <p><a href="\">Back</a></p>

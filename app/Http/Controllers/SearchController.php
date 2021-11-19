@@ -7,8 +7,11 @@ use App\Utils\Scraper\CnnIndo;
 use App\Utils\Scraper\Detik;
 use App\Utils\Scraper\JakartaPost;
 use App\Utils\Scraper\JawaPos;
+use App\Utils\Scraper\Kompasiana;
 use App\Utils\Scraper\Kompass;
+use App\Utils\Scraper\Kumparan;
 use App\Utils\Scraper\Merdeka;
+use App\Utils\Scraper\Republika;
 use App\Utils\Scraper\TribunNews;
 use Illuminate\Http\Request;
 
@@ -47,7 +50,14 @@ class SearchController extends Controller
         $merdeka = new Merdeka;
         $merdeka->scrape_search($search);
 
+        $kumparan = new Kumparan;
+        $kumparan->scrape_search($search);     
         
+        $kompasiana = new Kompasiana;
+        $kompasiana->scrape_search($search);
+
+        $republika = new Republika;
+        $republika->scrape_search($search);
         
         
         return view('resultpage', [
@@ -58,7 +68,10 @@ class SearchController extends Controller
             "bisnisIndo" => $bisnisIndo->getVariables(),
             "jawaPos" => $jawaPos->getVariables(),
             "jakartaPost" => $jakartaPost->getVariables(),
-            "merdeka" => $merdeka->getVariables()            
+            "merdeka" => $merdeka->getVariables(),
+            "kumparan" => $kumparan->getVariables(),
+            "kompasiana" => $kompasiana->getVariables(),
+            "republika" => $republika->getVariables()            
         ]);   
            
     }
